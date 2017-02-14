@@ -20,6 +20,8 @@ MACRO_ENSURE_OUT_OF_SOURCE_BUILD(
 get_filename_component(BDNAME ${CMAKE_CURRENT_BINARY_DIR} NAME)
 
 set(PNAME "${BDNAME}" CACHE STRING "the name for the new project")
+string(TOUPPER ${PNAME} PNAME_UPPER)
+string(TOLOWER ${PNAME} PNAME_LOWER)
 configure_file(./CMakeLists.txt.in ./CMakeLists.txt @ONLY)
 configure_file(./test/CMakeLists.txt.in ./test/CMakeLists.txt @ONLY)
 configure_file(../cmake/HunterGate.cmake ./cmake/HunterGate.cmake COPYONLY)

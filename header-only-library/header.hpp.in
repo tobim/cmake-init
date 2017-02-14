@@ -1,0 +1,29 @@
+
+#ifndef @PNAME_UPPER@_HPP
+#define @PNAME_UPPER@_HPP
+
+namespace @PNAME_LOWER@ {
+
+class @PNAME@ {
+  public:
+    unsigned fibonacci(unsigned n) {
+        if (n<=1) return 0;
+        if (n==2) return 1;
+
+        unsigned m2 = 1;
+        unsigned m1 = 0;
+        unsigned next;
+
+        for (unsigned i = 1; i < n; ++i) {
+            next = m2 + m1;
+            m2 = m1;
+            m1 = next;
+        }
+
+        return next;
+    }
+};
+
+} // namespace @PNAME_LOWER@
+
+#endif // @PNAME_UPPER@_HPP

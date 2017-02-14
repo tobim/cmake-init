@@ -22,6 +22,6 @@ set(SOURCES main.cpp
             test.cpp)
 
 add_executable(@PNAME@_test ${SOURCES})
-target_link_libraries(tree_test PUBLIC Catch::Catch @PNAME@)
+target_link_libraries(@PNAME@_test PUBLIC Catch::Catch @PNAME@)
 
-add_test(NAME @PNAME@_test)
+add_test(NAME @PNAME@_test COMMAND @PNAME@_test)

@@ -1,0 +1,14 @@
+
+#include "@PNAME@/@PNAME@.hpp"
+#include "catch.hpp"
+
+TEST_CASE( "the fibonacci numbers are calculated", "[fibonacci]" ) {
+    @PNAME_LOWER@::@PNAME@ test;
+    REQUIRE( test.fibonacci(1) == 0 );
+    REQUIRE( test.fibonacci(2) == 1 );
+    REQUIRE( test.fibonacci(3) == 1 );
+    REQUIRE( test.fibonacci(4) == 2 );
+    REQUIRE( test.fibonacci(5) == 3 );
+    REQUIRE( test.fibonacci(6) == 5 );
+    REQUIRE( test.fibonacci(7) == 8 );
+}

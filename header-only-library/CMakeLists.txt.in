@@ -1,0 +1,25 @@
+
+cmake_minimum_required(VERSION 3.2)
+
+include("cmake/HunterGate.cmake")
+
+# If Hunter is cloned this line will not
+# be used if fact. See 'testing' section for me info
+HunterGate(
+    URL "https://url/to/your/hunter-archive.tar.gz"
+    SHA1 "put-archive-sha1-here"
+)
+
+project(@PNAME@)
+
+option(ENABLE_TESTS "build and run tests" ON)
+
+add_library(@PNAME@ INTERFACE)
+target_include_directories(@PNAME@ INTERFACE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+
+if(ENABLE_TESTS)
+  include("cmake/compiler_support.cmake")
+  add_subdirectory(test)
+endif()

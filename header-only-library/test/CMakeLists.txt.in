@@ -1,0 +1,27 @@
+
+cmake_minimum_required(VERSION 3.2)
+
+enable_testing()
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" AND
+   "${CMAKE_CXX_SIMULATE_ID}" STREQUAL "MSVC")
+  add_compile_options(-Qunused-arguments)
+  add_compile_options(-Wno-deprecated-declarations)
+  add_compile_options(-Wno-unknown-argument)
+endif()
+
+hunter_add_package(Catch)
+
+find_package(Catch CONFIG REQUIRED)
+
+set(SOURCES main.cpp
+            test.cpp)
+
+add_executable(@PNAME@_test ${SOURCES})
+target_link_libraries(tree_test PUBLIC Catch::Catch @PNAME@)
+
+add_test(NAME @PNAME@_test)

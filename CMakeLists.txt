@@ -22,8 +22,12 @@ get_filename_component(BDNAME ${CMAKE_CURRENT_BINARY_DIR} NAME)
 set(PNAME "${BDNAME}" CACHE STRING "the name for the new project")
 string(TOUPPER ${PNAME} PNAME_UPPER)
 string(TOLOWER ${PNAME} PNAME_LOWER)
+
+set(PACKAGE_INIT_PLACEHOLDER "@PACKAGE_INIT@")
+
 configure_file(./CMakeLists.txt.in ./CMakeLists.txt @ONLY)
 configure_file(./test/CMakeLists.txt.in ./test/CMakeLists.txt @ONLY)
+configure_file(../cmake/Config.cmake.in ./cmake/${PNAME}Config.cmake.in @ONLY)
 configure_file(../cmake/HunterGate.cmake ./cmake/HunterGate.cmake COPYONLY)
 configure_file(../cmake/compiler_support.cmake ./cmake/compiler_support.cmake COPYONLY)
 configure_file(../cleanup_.sh ./cleanup_.sh)

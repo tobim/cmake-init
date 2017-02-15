@@ -1,23 +1,61 @@
 
 cmake_minimum_required(VERSION 3.2)
 
+# guard against in-source builds
+
+if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
+  message(FATAL_ERROR "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there. You may need to remove CMakeCache.txt and CMakeFiles/. ")
+endif()
+
 include("cmake/HunterGate.cmake")
 
-# If Hunter is cloned this line will not
-# be used if fact. See 'testing' section for me info
 HunterGate(
-    URL "https://url/to/your/hunter-archive.tar.gz"
-    SHA1 "put-archive-sha1-here"
+  URL "https://github.com/ruslo/hunter/archive/v0.18.1.tar.gz"
+  SHA1 "c1aa0ef5191e4484889866c62263a64f1ee61d3e"
 )
 
-project(@PNAME@)
+project(@PNAME@ VERSION 0.1.0 LANGUAGES CXX)
 
 option(ENABLE_TESTS "build and run tests" ON)
 
-add_library(@PNAME@ INTERFACE)
-target_include_directories(@PNAME@ INTERFACE
+add_library(${PROJECT_NAME} INTERFACE)
+target_include_directories(${PROJECT_NAME} INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
+
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(
+  cmake/${PROJECT_NAME}Config.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}Config.cmake
+  INSTALL_DESTINATION lib/cmake/${PROJECT_NAME}
+  NO_CHECK_REQUIRED_COMPONENTS_MACRO)
+
+write_basic_package_version_file(
+  "${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}ConfigVersion.cmake"
+  COMPATIBILITY AnyNewerVersion)
+
+# Export.
+export(
+  TARGETS ${PROJECT_NAME}
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/{PROJECT_NAME}Targets.cmake")
+
+# Install.
+install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME})
+
+install(
+  EXPORT ${PROJECT_NAME}
+  FILE ${PROJECT_NAME}Targets.cmake
+  DESTINATION lib/cmake/${PROJECT_NAME})
+
+install(DIRECTORY include/${PROJECT_NAME} DESTINATION include)
+
+install(
+  FILES
+  "${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}Config.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}ConfigVersion.cmake"
+  DESTINATION lib/cmake/${PROJECT_NAME})
+
 
 if(ENABLE_TESTS)
   include("cmake/compiler_support.cmake")

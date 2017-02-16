@@ -14,7 +14,7 @@ HunterGate(
   SHA1 "c1aa0ef5191e4484889866c62263a64f1ee61d3e"
 )
 
-project(@PNAME@ VERSION 0.1.0 LANGUAGES CXX)
+project($<TARGET_PROPERTY:DUMMY,TGT_NAME> VERSION 0.1.0 LANGUAGES CXX)
 
 option(ENABLE_TESTS "build and run tests" ON)
 
@@ -24,6 +24,8 @@ target_include_directories(${PROJECT_NAME} INTERFACE
   $<INSTALL_INTERFACE:include>)
 
 include(CMakePackageConfigHelpers)
+
+string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
 
 configure_package_config_file(
   cmake/${PROJECT_NAME}Config.cmake.in

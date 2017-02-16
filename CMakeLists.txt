@@ -23,15 +23,32 @@ set(PNAME "${BDNAME}" CACHE STRING "the name for the new project")
 string(TOUPPER ${PNAME} PNAME_UPPER)
 string(TOLOWER ${PNAME} PNAME_LOWER)
 
-set(PACKAGE_INIT_PLACEHOLDER "@PACKAGE_INIT@")
+add_custom_target(DUMMY)
+set_property(TARGET DUMMY
+             PROPERTY TGT_NAME ${PNAME})
 
-configure_file(./CMakeLists.txt.in ./CMakeLists.txt @ONLY)
-configure_file(./test/CMakeLists.txt.in ./test/CMakeLists.txt @ONLY)
-configure_file(../cmake/Config.cmake.in ./cmake/${PNAME}Config.cmake.in @ONLY)
-configure_file(../cmake/HunterGate.cmake ./cmake/HunterGate.cmake COPYONLY)
-configure_file(../cmake/compiler_support.cmake ./cmake/compiler_support.cmake COPYONLY)
-configure_file(../cleanup_.sh ./cleanup_.sh)
+#configure_file(../cleanup_.sh ./cleanup_.sh)
+file(GENERATE
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PNAME}Config.cmake.in
+     INPUT cmake/Config.cmake.in)
 
-execute_process(COMMAND sh ${CMAKE_CURRENT_SOURCE_DIR}/../cleanup.sh
-                WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                TIMEOUT 0.2)
+file(GENERATE
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/HunterGate.cmake
+     INPUT cmake/HunterGate.cmake)
+
+file(GENERATE
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/compiler_support.cmake
+     INPUT cmake/compiler_support.cmake)
+
+file(GENERATE
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CMakeLists.txt
+     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt.in)
+
+file(GENERATE
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/test/CMakeLists.txt
+     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/test/CMakeLists.txt.in)
+
+file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/Makefile)
+#execute_process(COMMAND sh ${CMAKE_CURRENT_SOURCE_DIR}/../cleanup.sh
+#WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+#TIMEOUT 0.2)

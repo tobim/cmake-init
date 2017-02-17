@@ -1,8 +1,16 @@
 cmake_minimum_required(VERSION 3.2)
 
-#get_filename_component(TTEMPLATE ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 include(../CMakeLists.txt)
 
-configure_file(./header.hpp.in ./include/${PNAME}/${PNAME}.hpp @ONLY)
-configure_file(./test/test.cpp.in ./test/test.cpp @ONLY)
-configure_file(./test/main.cpp ./test/main.cpp COPYONLY)
+file(GENERATE
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include/${PNAME}/${PNAME}.hpp
+     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/header.hpp.in)
+
+file(GENERATE
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/test/test.cpp
+     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/test/test.cpp.in)
+
+file(GENERATE
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/test/main.cpp
+     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/test/main.cpp)
+

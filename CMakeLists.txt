@@ -23,22 +23,36 @@ set(PNAME "${BDNAME}" CACHE STRING "the name for the new project")
 string(TOUPPER ${PNAME} PNAME_UPPER)
 string(TOLOWER ${PNAME} PNAME_LOWER)
 
+message(STATUS "generating project ${PNAME}")
+message(WARNING "please run FINALIZE.sh now!")
+
 add_custom_target(DUMMY)
 set_property(TARGET DUMMY
              PROPERTY TGT_NAME ${PNAME})
 
-#configure_file(../cleanup_.sh ./cleanup_.sh)
+set_property(TARGET DUMMY
+             PROPERTY BUILD_INTERFACE_GENERATOR
+             "$<BUILD_INTERFACE:")
+
+set_property(TARGET DUMMY
+             PROPERTY INSTALL_INTERFACE_GENERATOR
+             "$<INSTALL_INTERFACE:")
+
+file(GENERATE
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/FINALIZE.sh
+     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../FINALIZE.sh)
+
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PNAME}Config.cmake.in
-     INPUT cmake/Config.cmake.in)
+     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Config.cmake.in)
 
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/HunterGate.cmake
-     INPUT cmake/HunterGate.cmake)
+     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/HunterGate.cmake)
 
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/compiler_support.cmake
-     INPUT cmake/compiler_support.cmake)
+     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/compiler_support.cmake)
 
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CMakeLists.txt
@@ -49,6 +63,3 @@ file(GENERATE
      INPUT ${CMAKE_CURRENT_SOURCE_DIR}/test/CMakeLists.txt.in)
 
 file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/Makefile)
-#execute_process(COMMAND sh ${CMAKE_CURRENT_SOURCE_DIR}/../cleanup.sh
-#WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-#TIMEOUT 0.2)

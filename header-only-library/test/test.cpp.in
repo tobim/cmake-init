@@ -1,9 +1,9 @@
 
-#include "@PNAME@/@PNAME@.hpp"
+#include "$<TARGET_PROPERTY:DUMMY,TGT_NAME>/$<TARGET_PROPERTY:DUMMY,TGT_NAME>.hpp"
 #include "catch.hpp"
 
 TEST_CASE( "the fibonacci numbers are calculated", "[fibonacci]" ) {
-    @PNAME_LOWER@::@PNAME@ test;
+    $<LOWER_CASE:$<TARGET_PROPERTY:DUMMY,TGT_NAME>>::$<TARGET_PROPERTY:DUMMY,TGT_NAME> test;
     REQUIRE( test.fibonacci(0) == 0 );
     REQUIRE( test.fibonacci(1) == 1 );
     REQUIRE( test.fibonacci(2) == 1 );

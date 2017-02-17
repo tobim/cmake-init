@@ -1,10 +1,10 @@
 
-#ifndef @PNAME_UPPER@_HPP
-#define @PNAME_UPPER@_HPP
+#ifndef $<UPPER_CASE:$<TARGET_PROPERTY:DUMMY,TGT_NAME>>_HPP
+#define $<UPPER_CASE:$<TARGET_PROPERTY:DUMMY,TGT_NAME>>_HPP
 
-namespace @PNAME_LOWER@ {
+namespace $<LOWER_CASE:$<TARGET_PROPERTY:DUMMY,TGT_NAME>> {
 
-class @PNAME@ {
+class $<TARGET_PROPERTY:DUMMY,TGT_NAME> {
   public:
     unsigned fibonacci(unsigned n) {
         if (n==0) return 0;
@@ -24,6 +24,6 @@ class @PNAME@ {
     }
 };
 
-} // namespace @PNAME_LOWER@
+} // namespace $<LOWER_CASE:$<TARGET_PROPERTY:DUMMY,TGT_NAME>>
 
-#endif // @PNAME_UPPER@_HPP
+#endif // $<UPPER_CASE:$<TARGET_PROPERTY:DUMMY,TGT_NAME>>_HPP

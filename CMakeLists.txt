@@ -42,7 +42,7 @@ username(AUTHOR)
 set(LICENSE "Boost Software License 1.0" CACHE STRING "the license for your project (choosealicense.com)")
 set_property(CACHE LICENSE PROPERTY STRINGS "Boost Software License 1.0" "Apache License, Version 2.0" "MIT License" "GNU General Public License, version 3.0" "GNU Affero General Public License, version 3.0" "GNU Lesser General Public License, version 3.0" "GNU General Public License, version 2.0" "GNU Lesser General Public License, version 2.1" "CC0" "BSD 3-Clause" "BSD 2-Clause")
 
-message(STATUS "generating project ${PNAME}")
+#message(STATUS "generating project ${PNAME}")
 
 add_custom_target(DUMMY)
 set_property(TARGET DUMMY
@@ -65,7 +65,7 @@ if(LICENSE STREQUAL "Boost Software License 1.0")
     file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/boost/notice.txt NOTICE NEWLINE_CONSUME)
     string(CONFIGURE ${NOTICE} NOTICE @ONLY)
     set_property(TARGET DUMMY
-                PROPERTY NOTICE ${NOTICE})
+                 PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LICENSE_1_0.txt
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/boost/LICENSE_1_0.txt)
@@ -78,14 +78,26 @@ elseif(LICENSE STREQUAL "MIT License")
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LICENSE
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/mit/LICENSE.txt)
 elseif(LICENSE STREQUAL "GNU General Public License, version 3.0")
+    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-3.0-notice.txt NOTICE NEWLINE_CONSUME)
+    string(CONFIGURE ${NOTICE} NOTICE @ONLY)
+    set_property(TARGET DUMMY
+                 PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-3.0.txt)
 elseif(LICENSE STREQUAL "GNU Affero General Public License, version 3.0")
+    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/agpl-3.0-notice.txt NOTICE NEWLINE_CONSUME)
+    string(CONFIGURE ${NOTICE} NOTICE @ONLY)
+    set_property(TARGET DUMMY
+                 PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/agpl-3.0.txt)
 elseif(LICENSE STREQUAL "GNU Lesser General Public License, version 3.0")
+    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/lgpl-3.0-notice.txt NOTICE NEWLINE_CONSUME)
+    string(CONFIGURE ${NOTICE} NOTICE @ONLY)
+    set_property(TARGET DUMMY
+                 PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-3.0.txt)
@@ -93,10 +105,18 @@ elseif(LICENSE STREQUAL "GNU Lesser General Public License, version 3.0")
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING.Lesser
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/lgpl-3.0.txt)
 elseif(LICENSE STREQUAL "GNU General Public License, version 2.0")
+    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-2.0-notice.txt NOTICE NEWLINE_CONSUME)
+    string(CONFIGURE ${NOTICE} NOTICE @ONLY)
+    set_property(TARGET DUMMY
+                 PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-2.0.txt)
 elseif(LICENSE STREQUAL "GNU Lesser General Public License, version 2.1")
+    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/lgpl-2.1-notice.txt NOTICE NEWLINE_CONSUME)
+    string(CONFIGURE ${NOTICE} NOTICE @ONLY)
+    set_property(TARGET DUMMY
+                 PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-2.0.txt)

@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.2)
 
+set(PTYPE "library")
+set(DESC "My awesome lib" CACHE STRING "A short description of your header")
+
 include(../CMakeLists.txt)
 
 file(GENERATE

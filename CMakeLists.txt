@@ -70,10 +70,18 @@ if(LICENSE STREQUAL "Boost Software License 1.0")
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LICENSE_1_0.txt
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/boost/LICENSE_1_0.txt)
 elseif(LICENSE STREQUAL "Apache License, Version 2.0")
+    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/apache/notice.txt NOTICE NEWLINE_CONSUME)
+    string(CONFIGURE ${NOTICE} NOTICE @ONLY)
+    set_property(TARGET DUMMY
+                 PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LICENSE
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/apache/LICENSE-2.0.txt)
 elseif(LICENSE STREQUAL "MIT License")
+    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/mit/notice.txt NOTICE NEWLINE_CONSUME)
+    string(CONFIGURE ${NOTICE} NOTICE @ONLY)
+    set_property(TARGET DUMMY
+                 PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LICENSE
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/mit/LICENSE.txt)
@@ -124,8 +132,12 @@ elseif(LICENSE STREQUAL "GNU Lesser General Public License, version 2.1")
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING.Lesser
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/lgpl-2.1.txt)
 elseif(LICENSE STREQUAL "CC0")
+    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/creative-commons/notice.txt NOTICE NEWLINE_CONSUME)
+    string(CONFIGURE ${NOTICE} NOTICE @ONLY)
+    set_property(TARGET DUMMY
+                 PROPERTY NOTICE ${NOTICE})
     file(GENERATE
-         OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LICENSE
+         OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
          INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/creative-commons/CC0-1_0.txt)
 elseif(LICENSE STREQUAL "BSD 3-Clause")
     file(GENERATE

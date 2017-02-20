@@ -1,4 +1,4 @@
-//  @PNAME@ - @DESC@
+//  @PROJ_NAME@ - @DESC@
 //
 //  Written in @YEAR@ by @AUTHOR@ @AUTHOR_EMAIL@
 //

@@ -6,7 +6,7 @@ set(DESC "My awesome lib" CACHE STRING "A short description of your header")
 include(../CMakeLists.txt)
 
 file(GENERATE
-     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include/${PNAME}/${PNAME}.hpp
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include/${PROJ_NAME}/${PROJ_NAME}.hpp
      INPUT ${CMAKE_CURRENT_SOURCE_DIR}/header.hpp.in)
 
 file(GENERATE

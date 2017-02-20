@@ -2,26 +2,17 @@ cmake_minimum_required(VERSION 3.2)
 
 project(new_project)
 
-MACRO(MACRO_ENSURE_OUT_OF_SOURCE_BUILD MSG)
-     STRING(COMPARE EQUAL "${CMAKE_SOURCE_DIR}"
-     "${CMAKE_BINARY_DIR}" insource)
-     GET_FILENAME_COMPONENT(PARENTDIR ${CMAKE_SOURCE_DIR} PATH)
-     STRING(COMPARE EQUAL "${CMAKE_SOURCE_DIR}"
-     "${PARENTDIR}" insourcesubdir)
-    IF(insource OR insourcesubdir)
-        MESSAGE(FATAL_ERROR "${MSG}")
-    ENDIF(insource OR insourcesubdir)
-ENDMACRO(MACRO_ENSURE_OUT_OF_SOURCE_BUILD)
+include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/out_of_source_build.cmake)
 
-MACRO_ENSURE_OUT_OF_SOURCE_BUILD(
+ENSURE_OUT_OF_SOURCE_BUILD(
     "${CMAKE_PROJECT_NAME} requires an out of source build."
 )
 
 get_filename_component(BDNAME ${CMAKE_CURRENT_BINARY_DIR} NAME)
 
-set(PNAME "${BDNAME}" CACHE STRING "the name for the new project")
-string(TOUPPER ${PNAME} PNAME_UPPER)
-string(TOLOWER ${PNAME} PNAME_LOWER)
+set(PROJ_NAME "${BDNAME}" CACHE STRING "the name for the new project")
+string(TOUPPER ${PROJ_NAME} PROJ_NAME_UPPER)
+string(TOLOWER ${PROJ_NAME} PROJ_NAME_LOWER)
 
 function(username dst)
     if(UNIX)
@@ -42,11 +33,14 @@ username(AUTHOR)
 set(LICENSE "Boost Software License 1.0" CACHE STRING "the license for your project (choosealicense.com)")
 set_property(CACHE LICENSE PROPERTY STRINGS "Boost Software License 1.0" "Apache License, Version 2.0" "MIT License" "GNU General Public License, version 3.0" "GNU Affero General Public License, version 3.0" "GNU Lesser General Public License, version 3.0" "GNU General Public License, version 2.0" "GNU Lesser General Public License, version 2.1" "CC0" "BSD 3-Clause" "BSD 2-Clause")
 
-#message(STATUS "generating project ${PNAME}")
+#message(STATUS "generating project ${PROJ_NAME}")
 
 add_custom_target(DUMMY)
 set_property(TARGET DUMMY
-             PROPERTY TGT_NAME ${PNAME})
+             PROPERTY TGT_NAME ${PROJ_NAME})
+
+set_property(TARGET DUMMY
+             PROPERTY TGT_NAME_UPPER ${PROJ_NAME_UPPER})
 
 set_property(TARGET DUMMY
              PROPERTY BUILD_INTERFACE_GENERATOR
@@ -155,7 +149,7 @@ file(GENERATE
      INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../FINALIZE.sh)
 
 file(GENERATE
-     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PNAME}Config.cmake.in
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJ_NAME}Config.cmake.in
      INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Config.cmake.in)
 
 file(GENERATE
@@ -165,6 +159,10 @@ file(GENERATE
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/compiler_support.cmake
      INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/compiler_support.cmake)
+
+file(GENERATE
+     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/out_of_source_build.cmake
+     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/out_of_source_build.cmake)
 
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CMakeLists.txt

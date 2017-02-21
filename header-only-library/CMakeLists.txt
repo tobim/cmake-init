@@ -1,10 +1,12 @@
 cmake_minimum_required(VERSION 3.2)
 
+set(RESOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../_resources")
+
 set(PTYPE "library")
 set(DESC "My awesome lib" CACHE STRING "A short description of your header")
 option(IDE_TARGET "Create extra target for interface includes (IDE compatibility)" ON)
 
-include(../CMakeLists.txt)
+include(${RESOURCE_DIR}/CMakeLists.common)
 
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/include/${PROJ_NAME}/${PROJ_NAME}.hpp

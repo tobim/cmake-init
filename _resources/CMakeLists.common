@@ -1,8 +1,9 @@
+# vim: set ft=cmake:
 cmake_minimum_required(VERSION 3.2)
 
 project(new_project)
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/out_of_source_build.cmake)
+include(${RESOURCE_DIR}/cmake/out_of_source_build.cmake)
 
 ENSURE_OUT_OF_SOURCE_BUILD(
     "${CMAKE_PROJECT_NAME} requires an out of source build."
@@ -68,113 +69,113 @@ set_property(TARGET DUMMY
 
 
 if(LICENSE STREQUAL "Boost Software License 1.0")
-    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/boost/notice.txt NOTICE NEWLINE_CONSUME)
+    file(STRINGS ${RESOURCE_DIR}/licenses/boost/notice.txt NOTICE NEWLINE_CONSUME)
     string(CONFIGURE ${NOTICE} NOTICE @ONLY)
     set_property(TARGET DUMMY
                  PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LICENSE_1_0.txt
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/boost/LICENSE_1_0.txt)
+         INPUT ${RESOURCE_DIR}/licenses/boost/LICENSE_1_0.txt)
 elseif(LICENSE STREQUAL "Apache License, Version 2.0")
-    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/apache/notice.txt NOTICE NEWLINE_CONSUME)
+    file(STRINGS ${RESOURCE_DIR}/licenses/apache/notice.txt NOTICE NEWLINE_CONSUME)
     string(CONFIGURE ${NOTICE} NOTICE @ONLY)
     set_property(TARGET DUMMY
                  PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LICENSE
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/apache/LICENSE-2.0.txt)
+         INPUT ${RESOURCE_DIR}/licenses/apache/LICENSE-2.0.txt)
 elseif(LICENSE STREQUAL "MIT License")
-    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/mit/notice.txt NOTICE NEWLINE_CONSUME)
+    file(STRINGS ${RESOURCE_DIR}/licenses/mit/notice.txt NOTICE NEWLINE_CONSUME)
     string(CONFIGURE ${NOTICE} NOTICE @ONLY)
     set_property(TARGET DUMMY
                  PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LICENSE
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/mit/LICENSE.txt)
+         INPUT ${RESOURCE_DIR}/licenses/mit/LICENSE.txt)
 elseif(LICENSE STREQUAL "GNU General Public License, version 3.0")
-    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-3.0-notice.txt NOTICE NEWLINE_CONSUME)
+    file(STRINGS ${RESOURCE_DIR}/licenses/gnu/gpl-3.0-notice.txt NOTICE NEWLINE_CONSUME)
     string(CONFIGURE ${NOTICE} NOTICE @ONLY)
     set_property(TARGET DUMMY
                  PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-3.0.txt)
+         INPUT ${RESOURCE_DIR}/licenses/gnu/gpl-3.0.txt)
 elseif(LICENSE STREQUAL "GNU Affero General Public License, version 3.0")
-    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/agpl-3.0-notice.txt NOTICE NEWLINE_CONSUME)
+    file(STRINGS ${RESOURCE_DIR}/licenses/gnu/agpl-3.0-notice.txt NOTICE NEWLINE_CONSUME)
     string(CONFIGURE ${NOTICE} NOTICE @ONLY)
     set_property(TARGET DUMMY
                  PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/agpl-3.0.txt)
+         INPUT ${RESOURCE_DIR}/licenses/gnu/agpl-3.0.txt)
 elseif(LICENSE STREQUAL "GNU Lesser General Public License, version 3.0")
-    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/lgpl-3.0-notice.txt NOTICE NEWLINE_CONSUME)
+    file(STRINGS ${RESOURCE_DIR}/licenses/gnu/lgpl-3.0-notice.txt NOTICE NEWLINE_CONSUME)
     string(CONFIGURE ${NOTICE} NOTICE @ONLY)
     set_property(TARGET DUMMY
                  PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-3.0.txt)
+         INPUT ${RESOURCE_DIR}/licenses/gnu/gpl-3.0.txt)
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING.Lesser
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/lgpl-3.0.txt)
+         INPUT ${RESOURCE_DIR}/licenses/gnu/lgpl-3.0.txt)
 elseif(LICENSE STREQUAL "GNU General Public License, version 2.0")
-    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-2.0-notice.txt NOTICE NEWLINE_CONSUME)
+    file(STRINGS ${RESOURCE_DIR}/licenses/gnu/gpl-2.0-notice.txt NOTICE NEWLINE_CONSUME)
     string(CONFIGURE ${NOTICE} NOTICE @ONLY)
     set_property(TARGET DUMMY
                  PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-2.0.txt)
+         INPUT ${RESOURCE_DIR}/licenses/gnu/gpl-2.0.txt)
 elseif(LICENSE STREQUAL "GNU Lesser General Public License, version 2.1")
-    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/lgpl-2.1-notice.txt NOTICE NEWLINE_CONSUME)
+    file(STRINGS ${RESOURCE_DIR}/licenses/gnu/lgpl-2.1-notice.txt NOTICE NEWLINE_CONSUME)
     string(CONFIGURE ${NOTICE} NOTICE @ONLY)
     set_property(TARGET DUMMY
                  PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/gpl-2.0.txt)
+         INPUT ${RESOURCE_DIR}/licenses/gnu/gpl-2.0.txt)
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING.Lesser
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/gnu/lgpl-2.1.txt)
+         INPUT ${RESOURCE_DIR}/licenses/gnu/lgpl-2.1.txt)
 elseif(LICENSE STREQUAL "CC0")
-    file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/creative-commons/notice.txt NOTICE NEWLINE_CONSUME)
+    file(STRINGS ${RESOURCE_DIR}/licenses/creative-commons/notice.txt NOTICE NEWLINE_CONSUME)
     string(CONFIGURE ${NOTICE} NOTICE @ONLY)
     set_property(TARGET DUMMY
                  PROPERTY NOTICE ${NOTICE})
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/COPYING
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/creative-commons/CC0-1_0.txt)
+         INPUT ${RESOURCE_DIR}/licenses/creative-commons/CC0-1_0.txt)
 elseif(LICENSE STREQUAL "BSD 3-Clause")
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LICENSE
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/bsd/BSD_3-Clause.txt)
+         INPUT ${RESOURCE_DIR}/licenses/bsd/BSD_3-Clause.txt)
 elseif(LICENSE STREQUAL "BSD 2-Clause")
     file(GENERATE
          OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/LICENSE
-         INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../licenses/bsd/BSD_2-Clause.txt)
+         INPUT ${RESOURCE_DIR}/licenses/bsd/BSD_2-Clause.txt)
 endif()
 
 
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/FINALIZE.sh
-     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../FINALIZE.sh)
+     INPUT ${RESOURCE_DIR}/FINALIZE.sh)
 
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJ_NAME}Config.cmake.in
-     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Config.cmake.in)
+     INPUT ${RESOURCE_DIR}/cmake/Config.cmake.in)
 
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/HunterGate.cmake
-     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/HunterGate.cmake)
+     INPUT ${RESOURCE_DIR}/cmake/HunterGate.cmake)
 
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/compiler_support.cmake
-     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/compiler_support.cmake)
+     INPUT ${RESOURCE_DIR}/cmake/compiler_support.cmake)
 
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/out_of_source_build.cmake
-     INPUT ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/out_of_source_build.cmake)
+     INPUT ${RESOURCE_DIR}/cmake/out_of_source_build.cmake)
 
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CMakeLists.txt
@@ -183,5 +184,3 @@ file(GENERATE
 file(GENERATE
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/test/CMakeLists.txt
      INPUT ${CMAKE_CURRENT_SOURCE_DIR}/test/CMakeLists.txt.in)
-
-file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/Makefile)

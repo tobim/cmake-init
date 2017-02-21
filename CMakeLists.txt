@@ -14,6 +14,15 @@ set(PROJ_NAME "${BDNAME}" CACHE STRING "the name for the new project")
 string(TOUPPER ${PROJ_NAME} PROJ_NAME_UPPER)
 string(TOLOWER ${PROJ_NAME} PROJ_NAME_LOWER)
 
+function(classname src dst)
+    string(SUBSTRING ${src} 0 1 first)
+    string(TOUPPER ${first} first)
+    string(REGEX REPLACE "^.(.*)" "${first}\\1" tmp ${src})
+    set(${dst} ${tmp} PARENT_SCOPE)
+endfunction(classname)
+
+classname(${PROJ_NAME} PROJ_CLASS_NAME)
+
 function(username dst)
     if(UNIX)
         set(USER $ENV{USER})
@@ -38,6 +47,9 @@ set_property(CACHE LICENSE PROPERTY STRINGS "Boost Software License 1.0" "Apache
 add_custom_target(DUMMY)
 set_property(TARGET DUMMY
              PROPERTY TGT_NAME ${PROJ_NAME})
+
+set_property(TARGET DUMMY
+             PROPERTY TGT_CLASS_NAME ${PROJ_CLASS_NAME})
 
 set_property(TARGET DUMMY
              PROPERTY TGT_NAME_UPPER ${PROJ_NAME_UPPER})

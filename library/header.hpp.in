@@ -6,22 +6,7 @@ namespace $<LOWER_CASE:$<TARGET_PROPERTY:DUMMY,TGT_NAME>> {
 
 class $<TARGET_PROPERTY:DUMMY,TGT_CLASS_NAME> {
   public:
-    unsigned fibonacci(unsigned n) const {
-        if (n==0) return 0;
-        if (n==1) return 1;
-
-        unsigned m2 = 0;
-        unsigned m1 = 1;
-        unsigned next;
-
-        for (unsigned i = 1; i < n; ++i) {
-            next = m2 + m1;
-            m2 = m1;
-            m1 = next;
-        }
-
-        return next;
-    }
+    unsigned fibonacci(unsigned n) const;
 };
 
 } // namespace $<LOWER_CASE:$<TARGET_PROPERTY:DUMMY,TGT_NAME>>

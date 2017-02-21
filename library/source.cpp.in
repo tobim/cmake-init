@@ -1,0 +1,24 @@
+$<TARGET_PROPERTY:DUMMY,NOTICE>
+
+#include "$<TARGET_PROPERTY:DUMMY,TGT_NAME>/$<TARGET_PROPERTY:DUMMY,TGT_NAME>.hpp"
+
+namespace $<LOWER_CASE:$<TARGET_PROPERTY:DUMMY,TGT_NAME>> {
+
+unsigned $<TARGET_PROPERTY:DUMMY,TGT_CLASS_NAME>::fibonacci(unsigned n) const {
+    if (n==0) return 0;
+    if (n==1) return 1;
+
+    unsigned m2 = 0;
+    unsigned m1 = 1;
+    unsigned next;
+
+    for (unsigned i = 1; i < n; ++i) {
+        next = m2 + m1;
+        m2 = m1;
+        m1 = next;
+    }
+
+    return next;
+}
+
+} // namespace $<LOWER_CASE:$<TARGET_PROPERTY:DUMMY,TGT_NAME>>

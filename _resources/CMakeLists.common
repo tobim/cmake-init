@@ -11,7 +11,8 @@ ENSURE_OUT_OF_SOURCE_BUILD(
 
 get_filename_component(BDNAME ${CMAKE_CURRENT_BINARY_DIR} NAME)
 
-set(PROJ_NAME "${BDNAME}" CACHE STRING "the name for the new project")
+set(NEW_PROJECT_NAME "${BDNAME}" CACHE STRING "the name for the new project")
+set(PROJ_NAME ${NEW_PROJECT_NAME})
 string(TOUPPER ${PROJ_NAME} PROJ_NAME_UPPER)
 string(TOLOWER ${PROJ_NAME} PROJ_NAME_LOWER)
 
@@ -40,8 +41,9 @@ endfunction(username)
 
 username(AUTHOR)
 
-set(LICENSE "Boost Software License 1.0" CACHE STRING "the license for your project (choosealicense.com)")
-set_property(CACHE LICENSE PROPERTY STRINGS "Boost Software License 1.0" "Apache License, Version 2.0" "MIT License" "GNU General Public License, version 3.0" "GNU Affero General Public License, version 3.0" "GNU Lesser General Public License, version 3.0" "GNU General Public License, version 2.0" "GNU Lesser General Public License, version 2.1" "CC0" "BSD 3-Clause" "BSD 2-Clause")
+set(NEW_LICENSE "Boost Software License 1.0" CACHE STRING "the license for your project (choosealicense.com)")
+set_property(CACHE NEW_LICENSE PROPERTY STRINGS "Boost Software License 1.0" "Apache License, Version 2.0" "MIT License" "GNU General Public License, version 3.0" "GNU Affero General Public License, version 3.0" "GNU Lesser General Public License, version 3.0" "GNU General Public License, version 2.0" "GNU Lesser General Public License, version 2.1" "CC0" "BSD 3-Clause" "BSD 2-Clause")
+set(LICENSE "${NEW_LICENSE}")
 
 #message(STATUS "generating project ${PROJ_NAME}")
 
